@@ -16,13 +16,12 @@ Get detailes of the users I follow
 '''
 def getFriends():
 	auth = oauth.createAuth()
-	api = tweepy.API(auth)
+	api = tweepy.API(auth, parser=tweepy.parsers.JSONParser())
 
 	friends = api.friends()
 	return friends
 
 if __name__ == '__main__':
-	friends = getFriends()
-	print len(friends)
-	for i in friends:
+	ids = getIds()
+	for i in ids:
 		print i
