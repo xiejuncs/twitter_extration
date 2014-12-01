@@ -1,12 +1,16 @@
 import tweepy
-import IOUtils
+from credentials import keys
 
+'''
+keys are represented in a dictionary.
+initialize the auth object with keys 
+'''
 def createAuth():
-	path = "/home/jun/open_source/credentials/twitter/twitter_credential.txt"
-	ret = IOUtils.readFiles(path) 
-
-	auth = tweepy.OAuthHandler(ret[0], ret[1])
+	auth = tweepy.OAuthHandler(keys['consumer_key'], keys['consumer_secret'])
 	auth.secure = True
-	auth.set_access_token(ret[2], ret[3])
+	auth.set_access_token(keys['access_token'], keys['access_token_secret'])
 	
 	return auth
+
+if __name__ == '__main__':
+	createAuth()

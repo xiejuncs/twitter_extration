@@ -1,21 +1,23 @@
 '''
 https://gist.github.com/yanofsky/5436496
 '''
-
 import tweepy
+import tweepy_helper
 import oauth
 
-def get_all_tweets(screen_name):
-	auth = oauth.createAuth()
-	api = tweepy.API(auth, parser=tweepy.parsers.JSONParser())
-
+'''
+reference: https://dev.twitter.com/rest/reference/get/statuses/user_timeline
+allowed_param:'id', 'user_id', 'screen_name', 'since_id'
+'''
+def get_all_tweets(user_identifier, api, c = 10):
 	alltweets = []
-	new_tweets = api.user_timeline(screen_name,count = 10)
-	alltweets.extend(new_tweets)
-
-	for tweet in alltweets:
-		print tweet['text']
-
+	tweets = api.user_timeline(user_identifier, count = c)
+	alltweets.extend(tweets)
+	return alltweets
 
 if __name__ == '__main__':
-	get_all_tweets('20998647')
+	auth = oauth.createAuth()
+	api = tweepy_helper.getAPI(auth)
+	alltweets = get_all_tweets("BobbyDWeather", api)
+	for tweet in alltweets:
+		print tweet['text']
