@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 *~
+credentials.py
 
 # C extensions
 *.so
